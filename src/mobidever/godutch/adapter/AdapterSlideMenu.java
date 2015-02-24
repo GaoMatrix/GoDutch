@@ -10,38 +10,23 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
 import mobidever.godutch.R;
 import mobidever.godutch.adapter.base.AdapterBase;
 
-public class AdapterAppGrid extends AdapterBase {
+public class AdapterSlideMenu extends AdapterBase {
+    
     private class Holder {
         ImageView ivIcon;
         TextView tvName;
     }
 
-    private Integer[] mImageInteger = {
-            R.drawable.grid_payout,
-            R.drawable.grid_bill,
-            R.drawable.grid_report,
-            R.drawable.grid_account_book,
-            R.drawable.grid_category,
-            R.drawable.grid_user,
-    };
-
-    private String[] mImageString = new String[6];
-
-    private Context mContext;
-
-    public AdapterAppGrid(Context pContext)
-    {
-        mContext = pContext;
-        mImageString[0] = pContext.getString(R.string.appGridTextPayoutAdd);
-        mImageString[1] = pContext.getString(R.string.appGridTextPayoutManage);
-        mImageString[2] = pContext.getString(R.string.appGridTextStatisticsManage);
-        mImageString[3] = pContext.getString(R.string.appGridTextAccountBookManage);
-        mImageString[4] = pContext.getString(R.string.appGridTextCategoryManage);
-        mImageString[5] = pContext.getString(R.string.appGridTextUserManage);
+    public AdapterSlideMenu(Context context, List list) {
+        super(context, list);
+        // TODO Auto-generated constructor stub
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
