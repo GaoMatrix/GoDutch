@@ -71,7 +71,7 @@ public class AdapterAppGrid extends BaseAdapter {
             holder = (Holder) convertView.getTag();
         }
         holder.ivIcon.setImageResource(mImageInteger[position]);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(50, 50);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(80, 80);
         holder.ivIcon.setLayoutParams(layoutParams);
         holder.ivIcon.setScaleType(ImageView.ScaleType.FIT_XY);
 
