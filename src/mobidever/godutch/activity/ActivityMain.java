@@ -24,6 +24,7 @@ public class ActivityMain extends ActivityFrame {
         //在ActivityFrame里面调用SlideMenu再封装一层，这样外面Activity调用的
         //时候就简化多了。只需要下面一句话就可以了。
         createSlideMenu(R.array.SlideMenuActivityMain);
+        //test
     }
     
     private void initVariable() {
