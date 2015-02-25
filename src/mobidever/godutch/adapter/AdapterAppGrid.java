@@ -11,9 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import mobidever.godutch.R;
-import mobidever.godutch.adapter.base.AdapterBase;
 
-public class AdapterAppGrid extends AdapterBase {
+public class AdapterAppGrid extends BaseAdapter {
     private class Holder {
         ImageView ivIcon;
         TextView tvName;
@@ -41,6 +40,21 @@ public class AdapterAppGrid extends AdapterBase {
         mImageString[3] = pContext.getString(R.string.appGridTextAccountBookManage);
         mImageString[4] = pContext.getString(R.string.appGridTextCategoryManage);
         mImageString[5] = pContext.getString(R.string.appGridTextUserManage);
+    }
+
+    @Override
+    public int getCount() {
+        return mImageString.length;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return mImageString[position];
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override

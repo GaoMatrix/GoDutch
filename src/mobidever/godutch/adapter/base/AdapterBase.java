@@ -27,6 +27,10 @@ public abstract class AdapterBase extends BaseAdapter{
         return mContext;
     }
     
+    public List getmList() {
+        return mList;
+    }
+    
     @Override
     public int getCount() {
         return mList.size();

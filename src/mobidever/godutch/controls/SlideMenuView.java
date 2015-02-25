@@ -4,10 +4,13 @@ package mobidever.godutch.controls;
 import android.app.Activity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.LinearLayout.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import mobidever.godutch.R;
+import mobidever.godutch.adapter.AdapterSlideMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +39,7 @@ public class SlideMenuView {
     }
 
     private void initListeners() {
-        // TODO Auto-generated method stub
-
+        mBottomBoxLayout.setOnClickListener(new OnSlideMenuClick());
     }
 
     /**
@@ -55,7 +57,7 @@ public class SlideMenuView {
     private void close() {
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.FILL_PARENT, 68);
-        layoutParams.addRule(RelativeLayout.BELOW , R.id.includeTitle);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         mBottomBoxLayout.setLayoutParams(layoutParams);
         mIsClosed = true;
     }
@@ -77,8 +79,15 @@ public class SlideMenuView {
      * 所以要封装成实体类。
      * 随意随时随地都要有抽象和封装的思想，对代码的影响减少到最低
      */
-    private void add(SlideMenuItem slideMenuItem) {
+    public void add(SlideMenuItem slideMenuItem) {
         mMenuList.add(slideMenuItem);
+    }
+    
+    public void bindList() {
+        AdapterSlideMenu adapterSlideMenu = new AdapterSlideMenu(mActivity, mMenuList);
+        ListView listView = (ListView) mActivity.findViewById(R.id.lvSlideList);
+        listView.setAdapter(adapterSlideMenu);
+        listView.setOnItemClickListener(new OnSlideMenuItemClick());
     }
 
     private void onSlideMenuClick() {
@@ -89,9 +98,17 @@ public class SlideMenuView {
 
         @Override
         public void onClick(View v) {
-
+            toggle();
         }
 
     }
 
+    private class OnSlideMenuItemClick implements OnItemClickListener{
+
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+            
+        }
+        
+    }
 }

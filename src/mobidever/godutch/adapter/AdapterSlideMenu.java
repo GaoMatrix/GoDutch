@@ -14,17 +14,16 @@ import java.util.List;
 
 import mobidever.godutch.R;
 import mobidever.godutch.adapter.base.AdapterBase;
+import mobidever.godutch.controls.SlideMenuItem;
 
 public class AdapterSlideMenu extends AdapterBase {
     
     private class Holder {
-        ImageView ivIcon;
-        TextView tvName;
+        TextView tvMenuName;
     }
 
     public AdapterSlideMenu(Context context, List list) {
         super(context, list);
-        // TODO Auto-generated constructor stub
     }
 
 
@@ -32,21 +31,16 @@ public class AdapterSlideMenu extends AdapterBase {
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder;
         if (null == convertView) {
-            LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-            convertView = layoutInflater.inflate(R.layout.main_body_item, null);
+            convertView = getLayoutInflater().inflate(R.layout.slidemenu_list_item, null);
             holder = new Holder();
-            holder.ivIcon = (ImageView) convertView.findViewById(R.id.ivIcon);
-            holder.tvName = (TextView) convertView.findViewById(R.id.tvName);
+            holder.tvMenuName = (TextView) convertView.findViewById(R.id.tvName);
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
         }
-        holder.ivIcon.setImageResource(mImageInteger[position]);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(80, 80);
-        holder.ivIcon.setLayoutParams(layoutParams);
-        holder.ivIcon.setScaleType(ImageView.ScaleType.FIT_XY);
-
-        holder.tvName.setText(mImageString[position]);
+        
+        SlideMenuItem item = (SlideMenuItem) getmList().get(position);
+        holder.tvMenuName.setText(item.getTitle());
         return convertView;
     }
 

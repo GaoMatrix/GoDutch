@@ -9,8 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import mobidever.godutch.R;
+import mobidever.godutch.controls.SlideMenuItem;
+import mobidever.godutch.controls.SlideMenuView;
 
 public class ActivityFrame extends ActivityBase {
+    private SlideMenuView mSlideMenuView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,5 +28,19 @@ public class ActivityFrame extends ActivityBase {
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT);
         mainBody.addView(view, layoutParams);
+    }
+    
+    /**
+     * Every activity has slidemenu, so it need to package this function in ActivityFrame, which contains
+     * common business.
+     */
+    protected void createSlideMenu(int resID) {
+        mSlideMenuView = new SlideMenuView(this);
+        String[] menuItemArray = getResources().getStringArray(resID);
+        for (int i = 0; i < menuItemArray.length; i++) {
+            SlideMenuItem slideMenuItem = new SlideMenuItem(i, menuItemArray[i]);
+            mSlideMenuView.add(slideMenuItem);
+        }
+        mSlideMenuView.bindList();
     }
 }
