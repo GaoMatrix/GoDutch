@@ -8,7 +8,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-public abstract class SQLiteDALBase {
+import mobidever.godutch.database.base.SQLiteHelper.SQLiteDataTable;
+
+public abstract class SQLiteDALBase implements SQLiteDataTable{
 
     private Context mContext;
     private SQLiteDatabase mDatabase;
