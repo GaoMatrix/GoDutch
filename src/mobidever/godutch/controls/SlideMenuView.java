@@ -21,9 +21,15 @@ public class SlideMenuView {
     private List mMenuList;
     private boolean mIsClosed;
     private RelativeLayout mBottomBoxLayout;
+    private OnSlideMenuListener mOnSlideMenuListener;
+    
+    public interface OnSlideMenuListener {
+        public abstract void onSlideMenuItemClick(View view, SlideMenuItem slideMenuItem);
+    }
 
     public SlideMenuView(Activity activity) {
         mActivity = activity;
+        mOnSlideMenuListener = (OnSlideMenuListener)activity;
         initVariable();
         initView();
         initListeners();
@@ -106,8 +112,9 @@ public class SlideMenuView {
     private class OnSlideMenuItemClick implements OnItemClickListener{
 
         @Override
-        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-            
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long arg3) {
+            SlideMenuItem slideMenuItem = (SlideMenuItem) adapterView.getItemAtPosition(position);;
+            mOnSlideMenuListener.onSlideMenuItemClick(view, slideMenuItem);
         }
         
     }

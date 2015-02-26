@@ -2,13 +2,17 @@
 package mobidever.godutch.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import mobidever.godutch.R;
 import mobidever.godutch.activity.base.ActivityFrame;
 import mobidever.godutch.adapter.AdapterAppGrid;
+import mobidever.godutch.controls.SlideMenuItem;
+import mobidever.godutch.controls.SlideMenuView.OnSlideMenuListener;
 
-public class ActivityMain extends ActivityFrame {
+public class ActivityMain extends ActivityFrame implements OnSlideMenuListener{
     private GridView mGridView;
     private AdapterAppGrid mAdapterAppGrid;
 
@@ -41,6 +45,11 @@ public class ActivityMain extends ActivityFrame {
     
     private void bindData() {
         mGridView.setAdapter(mAdapterAppGrid);
+    }
+
+    @Override
+    public void onSlideMenuItemClick(View view, SlideMenuItem slideMenuItem) {
+        Toast.makeText(this, slideMenuItem.getTitle(), Toast.LENGTH_LONG).show();
     }
     
 }

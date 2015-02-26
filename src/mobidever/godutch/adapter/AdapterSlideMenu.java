@@ -33,7 +33,7 @@ public class AdapterSlideMenu extends AdapterBase {
         if (null == convertView) {
             convertView = getLayoutInflater().inflate(R.layout.slidemenu_list_item, null);
             holder = new Holder();
-            holder.tvMenuName = (TextView) convertView.findViewById(R.id.tvName);
+            holder.tvMenuName = (TextView) convertView.findViewById(R.id.tvMenuName);
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
