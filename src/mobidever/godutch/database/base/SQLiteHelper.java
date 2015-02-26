@@ -9,6 +9,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static SQLiteDataBaseConfig sSqLiteDataBaseConfig;
     private static SQLiteOpenHelper sInstance;
     private Context mContext;
+    
+    public interface SQLiteDataTable{
+        public void onCreate(SQLiteDatabase database);
+        public void onUpgrade(SQLiteDatabase database);
+    }
 
     private SQLiteHelper(Context context) {
         super(context, sSqLiteDataBaseConfig.getDataBaseName(), null, sSqLiteDataBaseConfig
