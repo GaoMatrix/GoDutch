@@ -27,8 +27,12 @@ public abstract class AdapterBase extends BaseAdapter{
         return mContext;
     }
     
-    public List getmList() {
+    public List getList() {
         return mList;
+    }
+    
+    public void setList(List list) {
+        mList = list;
     }
     
     @Override
