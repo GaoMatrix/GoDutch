@@ -48,17 +48,16 @@ public class SQLiteDALUser extends SQLiteDALBase{
 
     private ContentValues createParms(User user) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("UserName", user.getName());
-        contentValues.put("CreateDate",
+        contentValues.put("name", user.getName());
+        contentValues.put("createDate",
                 DateTools.getFormatDateTime(user.getCreateDate(), "yyyy-MM-dd HH:mm:ss"));
-        contentValues.put("State", user.getState());
+        contentValues.put("state", user.getState());
         return contentValues;
     }
 
     @Override
     protected String[] getTableNameAndPK() {
-        // TODO Auto-generated method stub
-        return null;
+        return new String[]{"User","id"};
     }
 
     @Override
@@ -88,10 +87,10 @@ public class SQLiteDALUser extends SQLiteDALBase{
         StringBuilder createTableBuilder = new StringBuilder();
 
         createTableBuilder.append("        Create  TABLE User(");
-        createTableBuilder .append("                [UserID] integer PRIMARY KEY AUTOINCREMENT NOT NULL");
-        createTableBuilder.append("                ,[UserName] varchar(10) NOT NULL");
-        createTableBuilder.append("                ,[CreateDate] datetime NOT NULL");
-        createTableBuilder.append("                ,[State] integer NOT NULL");
+        createTableBuilder .append("                [id] integer PRIMARY KEY AUTOINCREMENT NOT NULL");
+        createTableBuilder.append("                ,[name] varchar(10) NOT NULL");
+        createTableBuilder.append("                ,[createDate] datetime NOT NULL");
+        createTableBuilder.append("                ,[state] integer NOT NULL");
         createTableBuilder.append("                )");
 
         database.execSQL(createTableBuilder.toString());

@@ -57,9 +57,5 @@
 	
 	<string-array name="SQLiteDALClassName">
 		<item>SQLiteDALUser</item>
-		<item>SQLiteDALAccountBook</item>
-		<item>SQLiteDALCategory</item>
-		<item>SQLiteDALPayout</item>
-		<item>SQLiteDALCreateView</item>
 	</string-array>
 </resources>

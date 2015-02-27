@@ -29,6 +29,7 @@ public class AdapterUser extends AdapterBase {
     public AdapterUser(Context context)
     {
         super(context, null);
+        mContext = context;
         BusinessUser businessUser = new BusinessUser(context);
         List list = businessUser.getNotHideUser();
         setList(list);

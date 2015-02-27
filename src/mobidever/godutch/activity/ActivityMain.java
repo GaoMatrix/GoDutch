@@ -3,6 +3,8 @@ package mobidever.godutch.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -40,16 +42,46 @@ public class ActivityMain extends ActivityFrame implements OnSlideMenuListener{
     }
     
     private void initListeners() {
-        
+        mGridView.setOnItemClickListener(new onAppGridItemClickListener());
     }
     
     private void bindData() {
         mGridView.setAdapter(mAdapterAppGrid);
     }
+    
+    private class onAppGridItemClickListener implements OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView adapterView, View view, int position, long arg3) {
+            String menuName = (String) adapterView.getAdapter().getItem(position);
+            if (menuName.equals(getString(R.string.appGridTextUserManage))) {
+                openActivity(ActivityUser.class);
+                return;
+            }
+           /* if (_MenuName.equals(getString(R.string.appGridTextAccountBookManage))) {
+                OpenActivity(ActivityAccountBook.class);
+                return;
+            }
+            if (_MenuName.equals(getString(R.string.appGridTextCategoryManage))) {
+                OpenActivity(ActivityCategory.class);
+                return;
+            }
+            if (_MenuName.equals(getString(R.string.appGridTextPayoutAdd))) {
+                OpenActivity(ActivityPayoutAddOrEdit.class);
+                return;
+            }
+            if (_MenuName.equals(getString(R.string.appGridTextPayoutManage))) {
+                OpenActivity(ActivityPayout.class);
+                return;
+            }
+            if (_MenuName.equals(getString(R.string.appGridTextStatisticsManage))) {
+                OpenActivity(ActivityStatistics.class);
+                return;
+            }*/
+        }
+    }
 
     @Override
-    public void onSlideMenuItemClick(View view, SlideMenuItem slideMenuItem) {
-        Toast.makeText(this, slideMenuItem.getTitle(), Toast.LENGTH_LONG).show();
-    }
+    public void onSlideMenuItemClick(View view, SlideMenuItem slideMenuItem) {}
     
 }

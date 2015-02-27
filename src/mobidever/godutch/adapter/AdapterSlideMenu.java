@@ -39,7 +39,7 @@ public class AdapterSlideMenu extends AdapterBase {
             holder = (Holder) convertView.getTag();
         }
         
-        SlideMenuItem item = (SlideMenuItem) getmList().get(position);
+        SlideMenuItem item = (SlideMenuItem) getList().get(position);
         holder.tvMenuName.setText(item.getTitle());
         return convertView;
     }

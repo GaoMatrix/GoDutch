@@ -1,6 +1,11 @@
 
 package mobidever.godutch.database.base;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+
+import mobidever.godutch.utility.Reflection;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -8,7 +13,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SQLiteHelper extends SQLiteOpenHelper {
     private static SQLiteDataBaseConfig sSqLiteDataBaseConfig;
     private static SQLiteOpenHelper sInstance;
-    private Context mContext;
+    private static Context mContext;
+    private Reflection mReflection;
     
     public interface SQLiteDataTable{
         public void onCreate(SQLiteDatabase database);
@@ -23,15 +29,27 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     
     public static SQLiteOpenHelper getInstance(Context context) {
         if (null == sInstance) {
+            sSqLiteDataBaseConfig = SQLiteDataBaseConfig.getInstance(context);
             sInstance = new SQLiteHelper(context);
+            mContext = context;
         }
         return sInstance;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // TODO Auto-generated method stub
-
+        ArrayList<String> arrayList = sSqLiteDataBaseConfig.getTables();
+        mReflection = new Reflection();
+        for (int i = 0; i < arrayList.size(); i++) {
+            try {
+                SQLiteDataTable sqLiteDataTable = (SQLiteDataTable) mReflection.newInstance(arrayList.get(i), 
+                        new Object[]{mContext}, new Class[]{Context.class});
+                sqLiteDataTable.onCreate(db);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } 
+        }
+        
     }
 
     @Override
