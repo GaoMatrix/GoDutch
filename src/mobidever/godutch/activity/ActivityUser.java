@@ -12,8 +12,13 @@ import mobidever.godutch.utility.RegexTools;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,6 +26,7 @@ public class ActivityUser extends ActivityFrame implements OnSlideMenuListener {
     private ListView mListView;
     private AdapterUser mAdapterUser;
     private BusinessUser mBusinessUser;
+    private User mSelectedUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +39,6 @@ public class ActivityUser extends ActivityFrame implements OnSlideMenuListener {
         // 在ActivityFrame里面调用SlideMenu再封装一层，这样外面Activity调用的
         // 时候就简化多了。只需要下面一句话就可以了。
         createSlideMenu(R.array.SlideMenuUser);
-        // test
     }
 
     private void initVariable() {
@@ -45,7 +50,33 @@ public class ActivityUser extends ActivityFrame implements OnSlideMenuListener {
     }
 
     private void initListeners() {
-
+        registerForContextMenu(mListView);
+    }
+    
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+        AdapterContextMenuInfo adapterContextMenuInfo = (AdapterContextMenuInfo)menuInfo;
+        ListAdapter listAdapter = mListView.getAdapter();
+        mSelectedUser = (User) listAdapter.getItem(adapterContextMenuInfo.position);
+        
+        menu.setHeaderIcon(R.drawable.user_small_icon);
+        menu.setHeaderTitle(mSelectedUser.getName());
+        createMenu(menu);
+    }
+    
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case 1:
+                showUserAddOrEditDialog(mSelectedUser);
+                break;
+            case 2:
+                delete();
+                break;
+            default:
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 
     private void bindData() {
@@ -159,5 +190,22 @@ public class ActivityUser extends ActivityFrame implements OnSlideMenuListener {
         }
 
     }
+    
+    private void delete() {
+        String message = getString(R.string.DialogMessageUserDelete, new Object[] {
+            mSelectedUser.getName()
+        });
+        showAlertDialog(R.string.DialogTitleDelete, message, new OnDeleteClickListener());
+    }
 
+    private class OnDeleteClickListener implements DialogInterface.OnClickListener {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            boolean result = mBusinessUser.hideUserByUserID(mSelectedUser.getId());
+
+            if (result == true) {
+                bindData();
+            }
+        }
+    }
 }

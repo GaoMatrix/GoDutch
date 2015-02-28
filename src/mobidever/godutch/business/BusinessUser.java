@@ -1,14 +1,14 @@
 
 package mobidever.godutch.business;
 
-import android.content.Context;
+import java.util.ArrayList;
+import java.util.List;
 
 import mobidever.godutch.business.base.BusinessBase;
 import mobidever.godutch.database.sqlitedal.SQLiteDALUser;
 import mobidever.godutch.model.User;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.content.ContentValues;
+import android.content.Context;
 
 public class BusinessUser extends BusinessBase {
 
@@ -31,7 +31,7 @@ public class BusinessUser extends BusinessBase {
     }
 
     public boolean updateUserByUserID(User user) {
-        String condition = " And id = " + user.getId();
+        String condition = " id = " + user.getId();
         boolean result = mSqLiteDALUser.updateUser(condition, user);
         return result;
     }
@@ -79,6 +79,15 @@ public class BusinessUser extends BusinessBase {
         } else {
             return false;
         }
+    }
+    
+    public Boolean hideUserByUserID(int userID) {
+        String condition = " id = " + userID;
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("state", 0);
+        Boolean result = mSqLiteDALUser.updateUser(condition, contentValues);
+
+        return result;
     }
 
 }

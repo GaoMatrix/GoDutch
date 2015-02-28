@@ -41,6 +41,10 @@ public class SQLiteDALUser extends SQLiteDALBase{
         return getDataBase().update(getTableNameAndPK()[0], contentValues, condition, null) > 0;
     }
     
+    public Boolean updateUser(String condition, ContentValues contentValues) {
+        return getDataBase().update("User", contentValues, condition, null) > 0;
+    }
+    
     public List<User> getUser(String condition) {
         String sqlText = "Select * From User Where 1=1 " + condition;
         return getList(sqlText); // 这里使用了模板方法模式，钩子方法是findModel

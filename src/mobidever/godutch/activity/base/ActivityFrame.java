@@ -1,16 +1,16 @@
 
 package mobidever.godutch.activity.base;
 
+import mobidever.godutch.R;
+import mobidever.godutch.controls.SlideMenuItem;
+import mobidever.godutch.controls.SlideMenuView;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
-import mobidever.godutch.R;
-import mobidever.godutch.controls.SlideMenuItem;
-import mobidever.godutch.controls.SlideMenuView;
 
 public class ActivityFrame extends ActivityBase {
     private SlideMenuView mSlideMenuView;
@@ -46,5 +46,26 @@ public class ActivityFrame extends ActivityBase {
     
     protected void slideMenuToggle() {
         mSlideMenuView.toggle();
+    }
+    
+    protected void createMenu(Menu menu) {
+        int groupID = 0;
+        int order = 0;
+        int[] itemID = {
+                1, 2
+        };
+
+        for (int i = 0; i < itemID.length; i++) {
+            switch (itemID[i]) {
+                case 1:
+                    menu.add(groupID, itemID[i], order, R.string.MenuTextEdit);
+                    break;
+                case 2:
+                    menu.add(groupID, itemID[i], order, R.string.MenuTextDelete);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
