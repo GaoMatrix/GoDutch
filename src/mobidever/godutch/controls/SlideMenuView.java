@@ -85,7 +85,7 @@ public class SlideMenuView {
      * 如果外面调用开关，还要判断当前是开还是关，会很麻烦，
      * 一般正常是点一下开，点一下关
      */
-    private void toggle() {
+    public void toggle() {
         if (mIsClosed) {
             open();
         }else {

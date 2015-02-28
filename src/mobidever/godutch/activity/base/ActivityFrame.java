@@ -43,4 +43,8 @@ public class ActivityFrame extends ActivityBase {
         }
         mSlideMenuView.bindList();
     }
+    
+    protected void slideMenuToggle() {
+        mSlideMenuView.toggle();
+    }
 }
